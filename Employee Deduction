@@ -1,0 +1,181 @@
+import java.util.Scanner;
+
+public class EmployeeDeductionCalculator {
+
+    public static void main(String[] args) {
+        // Sample data
+        try (Scanner inp = new Scanner(System.in)) {
+            // Sample data
+            double Hourlyrate = 150.00; // Example hourly rate
+            double MonthlySalary = 20000.00; // Example monthly salary
+            
+            // Calculate Tardiness
+            double GrossDeduction = 0;
+            System.out.println("Has Tardiness? Type Yes or No");
+            String Tardiness = inp.next();
+            boolean hasTardiness = Tardiness.equalsIgnoreCase("yes");
+            if (hasTardiness) {
+                System.out.print("Total Hours of late within the month: ");
+                double TotalHours = inp.nextDouble();
+                double Perminutesrate = Hourlyrate / 60;
+                GrossDeduction += TotalHours * Perminutesrate;
+            } else {
+                System.out.println("No Tardiness within the month");
+            }
+            
+            // Calculate Half day
+            System.out.println("Has Half day? Type Yes or No");
+            String Halfdaywork = inp.next();
+            boolean HasHalfdaywork = Halfdaywork.equalsIgnoreCase("yes");
+            if (HasHalfdaywork) {
+                System.out.print("Total half day within the month: ");
+                long Halfday = inp.nextLong();
+                long HalfHours = 4;
+                GrossDeduction += Halfday * HalfHours * (Hourlyrate / 2);
+            } else {
+                System.out.println("No Half day within the month");
+            }
+            
+            // Calculate Pagibig, Philhealth, SSS
+            double Pagibig = 100;
+            double PhilhealthRate = 0.03;
+            double Philhealth = PhilhealthRate * MonthlySalary;
+            double SSS = calculateSSS(MonthlySalary);
+            
+            double Deduction2 = Pagibig + Philhealth + SSS + GrossDeduction;
+            double NetSalary = MonthlySalary - Deduction2;
+            
+            String info;
+            long withholdingTax = calculateWithholdingTax(NetSalary);
+            if (withholdingTax == 0) {
+                info = "No withholding tax";
+            } else {
+                info = "Withholding tax: " + withholdingTax;
+            }
+            
+            System.out.printf("Gross Deduction: %.2f\n", GrossDeduction);
+            System.out.printf("Net Salary after deductions: %.2f\n", NetSalary);
+            System.out.println(info);
+        } // Example hourly rate
+    }
+    private static double calculateSSS(double MonthlySalary) {
+        double Salary6 = 0;
+        if (MonthlySalary < 3250) {
+            Salary6 = 135.00;
+        } else if (MonthlySalary >= 3250 && MonthlySalary <= 3750) {
+            Salary6 = 157.00;
+        } else if (MonthlySalary >= 3750 && MonthlySalary <= 4250) {
+            Salary6 = 180.00;
+        } else if (MonthlySalary >= 4250 && MonthlySalary <= 4750) {
+            Salary6 = 202.50;
+        } else if (MonthlySalary >= 4750 && MonthlySalary <= 5250) {
+            Salary6 = 225.00;
+        } else if (MonthlySalary >= 5250 && MonthlySalary <= 5750) {
+            Salary6 = 247.50;
+        } else if (MonthlySalary >= 5750 && MonthlySalary <= 6250) {
+            Salary6 = 270.00;
+        } else if (MonthlySalary >= 6250 && MonthlySalary <= 6750) {
+            Salary6 = 292.50;
+        } else if (MonthlySalary >= 6750 && MonthlySalary <= 7250) {
+            Salary6 = 315.00;
+        } else if (MonthlySalary >= 7250 && MonthlySalary <= 7750) {
+            Salary6 = 337.50;
+        } else if (MonthlySalary >= 7750 && MonthlySalary <= 8250) {
+            Salary6 = 360.00;
+        } else if (MonthlySalary >= 8250 && MonthlySalary <= 8750) {
+            Salary6 = 382.50;
+        } else if (MonthlySalary >= 8750 && MonthlySalary <= 9250) {
+            Salary6 = 405.00;
+        } else if (MonthlySalary >= 9250 && MonthlySalary <= 9750) {
+            Salary6 = 427.50;
+        } else if (MonthlySalary >= 9750 && MonthlySalary <= 10250) {
+            Salary6 = 450.00;
+        } else if (MonthlySalary >= 10250 && MonthlySalary <= 10750) {
+            Salary6 = 472.50;
+        } else if (MonthlySalary >= 10750 && MonthlySalary <= 11250) {
+            Salary6 = 495.00;
+        } else if (MonthlySalary >= 11250 && MonthlySalary <= 11750) {
+            Salary6 = 517.50;
+        } else if (MonthlySalary >= 11750 && MonthlySalary <= 12250) {
+            Salary6 = 540.00;
+        } else if (MonthlySalary >= 12250 && MonthlySalary <= 12750) {
+            Salary6 = 562.50;
+        } else if (MonthlySalary >= 12750 && MonthlySalary <= 13250) {
+            Salary6 = 585.00;
+        } else if (MonthlySalary >= 13250 && MonthlySalary <= 13750) {
+            Salary6 = 607.50;
+        } else if (MonthlySalary >= 13750 && MonthlySalary <= 14250) {
+            Salary6 = 630.00;
+        } else if (MonthlySalary >= 14250 && MonthlySalary <= 14750) {
+            Salary6 = 652.50;
+        } else if (MonthlySalary >= 14750 && MonthlySalary <= 15250) {
+            Salary6 = 675.00;
+        } else if (MonthlySalary >= 15250 && MonthlySalary <= 15750) {
+            Salary6 = 697.50;
+        } else if (MonthlySalary >= 15750 && MonthlySalary <= 16250) {
+            Salary6 = 720.00;
+        } else if (MonthlySalary >= 16250 && MonthlySalary <= 16750) {
+            Salary6 = 742.50;
+        } else if (MonthlySalary >= 16750 && MonthlySalary <= 17250) {
+            Salary6 = 765.00;
+        } else if (MonthlySalary >= 17250 && MonthlySalary <= 17750) {
+            Salary6 = 787.50;
+        } else if (MonthlySalary >= 17750 && MonthlySalary <= 18250) {
+            Salary6 = 810.00;
+        } else if (MonthlySalary >= 18250 && MonthlySalary <= 18750) {
+            Salary6 = 832.50;
+        } else if (MonthlySalary >= 18750 && MonthlySalary <= 19250) {
+            Salary6 = 855.00;
+        } else if (MonthlySalary >= 19250 && MonthlySalary <= 19750) {
+            Salary6 = 877.50;
+        } else if (MonthlySalary >= 19750 && MonthlySalary <= 20250) {
+            Salary6 = 900.00;
+        } else if (MonthlySalary >= 20250 && MonthlySalary <= 20750) {
+            Salary6 = 922.50;
+        } else if (MonthlySalary >= 20750 && MonthlySalary <= 21750) {
+            Salary6 = 967.50;
+        } else if (MonthlySalary >= 21750 && MonthlySalary <= 22250) {
+            Salary6 = 990.00;
+        } else if (MonthlySalary >= 22250 && MonthlySalary <= 22750) {
+            Salary6 = 1012.50;
+        } else if (MonthlySalary >= 22750 && MonthlySalary <= 23250) {
+            Salary6 = 1035.00;
+        } else if (MonthlySalary >= 23250 && MonthlySalary <= 23750) {
+            Salary6 = 1057.50;
+        } else if (MonthlySalary >= 23750 && MonthlySalary <= 24250) {
+            Salary6 = 1080.00;
+        } else if (MonthlySalary >= 24250 && MonthlySalary <= 24750) {
+            Salary6 = 1102.50;
+        } else if (MonthlySalary > 24750) {
+            Salary6 = 1125.50;
+        } else {
+            System.out.println("Error");
+        }
+        return Salary6;
+    }
+
+    private static long calculateWithholdingTax(double Deduction) {
+        long withholdingTax = 0;
+        if (Deduction < 20832) {
+            // No withholding tax
+        } else if (Deduction >= 20833 && Deduction <= 33333) {
+            double DeductionO = Deduction - 20833;
+            withholdingTax = (long) (DeductionO * 0.2);
+        } else if (Deduction >= 33333 && Deduction <= 66667) {
+            double DeductionO = Deduction - 33333;
+            withholdingTax = (long) (DeductionO * 0.25 + 2500);
+        } else if (Deduction >= 66667 && Deduction <= 166667) {
+            double DeductionO = Deduction - 66667;
+            withholdingTax = (long) (DeductionO * 0.3 + 10833);
+        } else if (Deduction >= 166667 && Deduction <= 666667) {
+            double DeductionO = Deduction - 166667;
+            withholdingTax = (long) (DeductionO * 0.32 + 40833.33);
+        } else if (Deduction > 666667) {
+            double DeductionO = Deduction - 666667;
+            withholdingTax = (long) (DeductionO * 0.35 + 200833.33);
+        } else {
+            System.out.println("Error");
+        }
+        return withholdingTax;
+    }
+}
