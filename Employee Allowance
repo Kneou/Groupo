@@ -1,0 +1,52 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+class Employee {
+    String employeeNumber;
+    String employeeName;
+    double allowance;
+
+    public Employee(String employeeNumber, String employeeName) {
+        this.employeeNumber = employeeNumber;
+        this.employeeName = employeeName;
+        this.allowance = 0;
+    }
+
+    public void addAllowance(double allowance) {
+        this.allowance += allowance;
+    }
+
+    public double getAllowance() {
+        return allowance;
+    }
+
+    public String forwardDetails() {
+        return String.format("Employee Number: %s, Employee Name: %s, Total Allowance: %.2f", employeeNumber, employeeName, allowance);
+    }
+}
+
+public class EmployeeAllowanceCalculator {
+
+    public static void main(String[] args) {
+        try (Scanner inp = new Scanner(System.in)) {
+            List<Employee> employees = new ArrayList<>();
+            
+            // Adding sample employees
+            employees.add(new Employee("1", "Manuel Garcia III"));
+            employees.add(new Employee("2", "Antonio Lim"));
+            
+            // Adding allowances
+            for (Employee employee : employees) {
+                System.out.printf("Enter allowance for %s (%s): ", employee.employeeName, employee.employeeNumber);
+                double allowance = inp.nextDouble();
+                employee.addAllowance(allowance);
+            }
+            
+            // Calculating and forwarding details
+            for (Employee employee : employees) {
+                System.out.println(employee.forwardDetails());
+            }
+        }
+    }
+}
