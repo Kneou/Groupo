@@ -1,0 +1,431 @@
+package employeesystem;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class EmployeeSystem {
+
+    public static class Employee {
+        // Attributes of the Employee class
+        private int employeeNumber;
+        private String employeeName;
+        private int birthday;
+        private String address;
+        private int phoneNumber;
+        private int sssNumber;
+        private int tinNumber;
+        private int pagIbigNumber;
+        private String status;
+        private String position;
+        private String immediateSupervisor;
+        private double basicSalary;
+        private double riceSubsidy;
+        private double hourlyRate;
+
+        // Constructor
+        public Employee(int employeeNumber, String employeeName, int birthday, String address, int phoneNumber, int sssNumber, int tinNumber, int pagIbigNumber,
+                        String status, String position, String immediateSupervisor, double basicSalary, double riceSubsidy, double hourlyRate) {
+            this.employeeNumber = employeeNumber;
+            this.employeeName = employeeName;
+            this.birthday = birthday;
+            this.address = address;
+            this.phoneNumber = phoneNumber;
+            this.sssNumber = sssNumber;
+            this.tinNumber = tinNumber;
+            this.pagIbigNumber = pagIbigNumber;
+            this.status = status;
+            this.position = position;
+            this.immediateSupervisor = immediateSupervisor;
+            this.basicSalary = basicSalary;
+            this.riceSubsidy = riceSubsidy;
+            this.hourlyRate = hourlyRate;
+        }
+
+        // Getters and Setters
+        public int getEmployeeNumber() {
+            return employeeNumber;
+        }
+
+        public void setEmployeeNumber(int employeeNumber) {
+            this.employeeNumber = employeeNumber;
+        }
+
+        public String getEmployeeName() {
+            return employeeName;
+        }
+
+        public void setEmployeeName(String employeeName) {
+            this.employeeName = employeeName;
+        }
+
+        public int getBirthday() {
+            return birthday;
+        }
+
+        public void setBirthday(int birthday) {
+            this.birthday = birthday;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
+        public int getPhoneNumber() {
+            return phoneNumber;
+        }
+
+        public void setPhoneNumber(int phoneNumber) {
+            this.phoneNumber = phoneNumber;
+        }
+
+        public int getSssNumber() {
+            return sssNumber;
+        }
+
+        public void setSssNumber(int sssNumber) {
+            this.sssNumber = sssNumber;
+        }
+
+        public int getTinNumber() {
+            return tinNumber;
+        }
+
+        public void setTinNumber(int tinNumber) {
+            this.tinNumber = tinNumber;
+        }
+
+        public int getPagIbigNumber() {
+            return pagIbigNumber;
+        }
+
+        public void setPagIbigNumber(int pagIbigNumber) {
+            this.pagIbigNumber = pagIbigNumber;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
+        public String getPosition() {
+            return position;
+        }
+
+        public void setPosition(String position) {
+            this.position = position;
+        }
+
+        public String getImmediateSupervisor() {
+            return immediateSupervisor;
+        }
+
+        public void setImmediateSupervisor(String immediateSupervisor) {
+            this.immediateSupervisor = immediateSupervisor;
+        }
+
+        public double getBasicSalary() {
+            return basicSalary;
+        }
+
+        public void setBasicSalary(double basicSalary) {
+            this.basicSalary = basicSalary;
+        }
+
+        public double getRiceSubsidy() {
+            return riceSubsidy;
+        }
+
+        public void setRiceSubsidy(double riceSubsidy) {
+            this.riceSubsidy = riceSubsidy;
+        }
+
+        public double getHourlyRate() {
+            return hourlyRate;
+        }
+
+        public void setHourlyRate(double hourlyRate) {
+            this.hourlyRate = hourlyRate;
+        }
+
+        // Method to display Employee details
+        public void displayEmployeeDetails() {
+            System.out.println("---------------------------");
+            System.out.println("Employee Number: " + employeeNumber);
+            System.out.println("Employee Name: " + employeeName);
+            System.out.println("Birthday: " + birthday);
+            System.out.println("Address: " + address);
+            System.out.println("Phone Number: " + phoneNumber);
+            System.out.println("SSS Number: " + sssNumber);
+            System.out.println("TIN Number: " + tinNumber);
+            System.out.println("Pag-ibig Number: " + pagIbigNumber);
+            System.out.println("Status: " + status);
+            System.out.println("Position: " + position);
+            System.out.println("Immediate Supervisor: " + immediateSupervisor);
+            System.out.println("Basic Salary: " + basicSalary);
+            System.out.println("Rice Subsidy: " + riceSubsidy);
+            System.out.println("Hourly Rate: " + hourlyRate);
+            System.out.println("---------------------------");
+        }
+        
+        // Method to display Employee details
+        public void displayEmployeeListDetails() {
+            System.out.println("---------------------------");
+            System.out.println("Employee Number: " + employeeNumber);
+            System.out.println("Employee Name: " + employeeName);
+            System.out.println("---------------------------");
+        }
+    }
+
+    public static class EmployeeManager {
+        private List<Employee> employees;
+
+        public EmployeeManager() {
+            employees = new ArrayList<>();
+        }
+
+        // Create
+        public void addEmployee(Employee employee) {
+            employees.add(employee);
+            System.out.println("Employee added: " + employee.getEmployeeName());
+        }
+
+        // Read (Search)
+        public void searchEmployee(int employeeNumber) {
+            for (Employee employee : employees) {
+                if (employee.getEmployeeNumber() == employeeNumber) {
+                    employee.displayEmployeeDetails();
+                    handleEmployeeActions(employee);
+                    return;
+                }
+            }
+            System.out.println("Employee not found.");
+        }
+
+        public void listEmployees() {
+            if (employees.isEmpty()) {
+                System.out.println("No employees to display.");
+                return;
+            }
+            for (Employee employee : employees) {
+                employee.displayEmployeeListDetails();
+                System.out.println();
+            }
+        }
+
+        // Update
+        private void updateEmployee(Employee employee) {
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.print("Enter new employee name (current: " + employee.getEmployeeName() + "): ");
+            employee.setEmployeeName(scanner.nextLine());
+
+            System.out.print("Enter new birthday (current: " + employee.getBirthday() + "): ");
+            employee.setBirthday(scanner.nextInt());
+
+            scanner.nextLine(); // Consume newline
+
+            System.out.print("Enter new address (current: " + employee.getAddress() + "): ");
+            employee.setAddress(scanner.nextLine());
+
+            System.out.print("Enter new phone number (current: " + employee.getPhoneNumber() + "): ");
+            employee.setPhoneNumber(scanner.nextInt());
+
+            System.out.print("Enter new SSS number (current: " + employee.getSssNumber() + "): ");
+            employee.setSssNumber(scanner.nextInt());
+
+            System.out.print("Enter new TIN number (current: " + employee.getTinNumber() + "): ");
+            employee.setTinNumber(scanner.nextInt());
+
+            System.out.print("Enter new Pag-ibig number (current: " + employee.getPagIbigNumber() + "): ");
+            employee.setPagIbigNumber(scanner.nextInt());
+
+            scanner.nextLine(); // Consume newline
+
+            System.out.print("Enter new status (current: " + employee.getStatus() + "): ");
+            employee.setStatus(scanner.nextLine());
+
+            System.out.print("Enter new position (current: " + employee.getPosition() + "): ");
+            employee.setPosition(scanner.nextLine());
+
+            System.out.print("Enter new immediate supervisor (current: " + employee.getImmediateSupervisor() + "): ");
+            employee.setImmediateSupervisor(scanner.nextLine());
+
+            System.out.print("Enter new basic salary (current: " + employee.getBasicSalary() + "): ");
+            employee.setBasicSalary(scanner.nextDouble());
+
+            System.out.print("Enter new rice subsidy (current: " + employee.getRiceSubsidy() + "): ");
+            employee.setRiceSubsidy(scanner.nextDouble());
+
+            System.out.print("Enter new hourly rate (current: " + employee.getHourlyRate() + "): ");
+            employee.setHourlyRate(scanner.nextDouble());
+
+            System.out.println("Employee updated: " + employee.getEmployeeName());
+        }
+
+        // Delete
+        private void deleteEmployee(Employee employee) {
+            employees.remove(employee);
+            System.out.println("Employee deleted: " + employee.getEmployeeName());
+        }
+
+        // Handle Employee Actions
+        private void handleEmployeeActions(Employee employee) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Select an action: 1. Update, 2. Delete, 3. No Action");
+            int action = scanner.nextInt();
+
+            switch (action) {
+                case 1:
+                    updateEmployee(employee);
+                    break;
+                case 2:
+                    deleteEmployee(employee);
+                    break;
+                case 3:
+                    System.out.println("No action taken.");
+                    break;
+                default:
+                    System.out.println("Invalid action.");
+            }
+        }
+
+        // View Employee Attendance (placeholder)
+        public void viewEmployeeAttendance(int employeeNumber) {
+            for (Employee employee : employees) {
+                if (employee.getEmployeeNumber() == employeeNumber) {
+                    System.out.println("Displaying attendance for employee: " + employee.getEmployeeName());
+                    return;
+                }
+            }
+            System.out.println("Employee not found.");
+        }
+
+        // View Employee Salary (placeholder)
+        public void viewEmployeeSalary(int employeeNumber) {
+            for (Employee employee : employees) {
+                if (employee.getEmployeeNumber() == employeeNumber) {
+                    System.out.println("Displaying salary for employee: " + employee.getEmployeeName());
+                    System.out.println("Salary: " + employee.getBasicSalary());
+                    return;
+                }
+            }
+            System.out.println("Employee not found.");
+        }
+
+        // Menu
+        public void menu() {
+            Scanner scanner = new Scanner(System.in);
+            int choice;
+
+            do {
+                System.out.println("\nMenu:");
+                System.out.println("1. Add Employee");
+                System.out.println("2. List Employees");
+                System.out.println("3. Search Employee");
+                System.out.println("4. View Employee Attendance");
+                System.out.println("5. View Employee Salary");
+                System.out.println("6. Exit");
+                System.out.print("Enter your choice: ");
+                choice = scanner.nextInt();
+
+                switch (choice) {
+                    case 1:
+                        System.out.print("Enter employee number: ");
+                        int employeeNumber = scanner.nextInt();
+                        scanner.nextLine(); // Consume newline
+
+                        System.out.print("Enter employee name: ");
+                        String employeeName = scanner.nextLine();
+
+                        System.out.print("Enter birthday: ");
+                        int birthday = scanner.nextInt();
+                        scanner.nextLine(); // Consume newline
+
+                        System.out.print("Enter address: ");
+                        String address = scanner.nextLine();
+
+                        System.out.print("Enter phone number: ");
+                        int phoneNumber = scanner.nextInt();
+
+                        System.out.print("Enter SSS number: ");
+                        int sssNumber = scanner.nextInt();
+
+                        System.out.print("Enter TIN number: ");
+                        int tinNumber = scanner.nextInt();
+
+                        System.out.print("Enter Pag-ibig number: ");
+                        int pagIbigNumber = scanner.nextInt();
+                        scanner.nextLine(); // Consume newline
+
+                        System.out.print("Enter status: ");
+                        String status = scanner.nextLine();
+
+                        System.out.print("Enter position: ");
+                        String position = scanner.nextLine();
+
+                        System.out.print("Enter immediate supervisor: ");
+                        String immediateSupervisor = scanner.nextLine();
+
+                        System.out.print("Enter basic salary: ");
+                        double basicSalary = scanner.nextDouble();
+
+                        System.out.print("Enter rice subsidy: ");
+                        double riceSubsidy = scanner.nextDouble();
+
+                        System.out.print("Enter hourly rate: ");
+                        double hourlyRate = scanner.nextDouble();
+
+                        Employee newEmployee = new Employee(employeeNumber, employeeName, birthday, address, phoneNumber, sssNumber, tinNumber, pagIbigNumber,
+                                status, position, immediateSupervisor, basicSalary, riceSubsidy, hourlyRate);
+                        addEmployee(newEmployee);
+                        break;
+
+                    case 2:
+                        listEmployees();
+                        break;
+
+                    case 3:
+                        System.out.print("Enter employee number to search: ");
+                        int searchNumber = scanner.nextInt();
+                        searchEmployee(searchNumber);
+                        break;
+
+                    case 4:
+                        System.out.print("Enter employee number to view attendance: ");
+                        int attendanceNumber = scanner.nextInt();
+                        viewEmployeeAttendance(attendanceNumber);
+                        break;
+
+                    case 5:
+                        System.out.print("Enter employee number to view salary: ");
+                        int salaryNumber = scanner.nextInt();
+                        viewEmployeeSalary(salaryNumber);
+                        break;
+
+                    case 6:
+                        System.out.println("Exiting...");
+                        break;
+
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                }
+            } while (choice != 6);
+        }
+    }
+
+    // Main method for testing
+    public static void main(String[] args) {
+        EmployeeManager manager = new EmployeeManager();
+        manager.menu();
+    }
+}
+
+
